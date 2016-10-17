@@ -12,8 +12,6 @@ An RGB color is specified as an integer between 0 and 255 for each of the three 
 
 ## Background
 
-**Author:** Tony Lanera
-
 **Date:**   10/14/201
 
 **Description:**
@@ -28,12 +26,8 @@ This is the first site developed utilizing HTML, CSS and Javascript.
 The goal of this exercise is to gain understanding and practice using the DOM and Javascript.
 The HTML and CSS is not complexed
 
-**Highlights:**
+## Coding Highlights
 
-This is my first javascript built from scratch. 100% of the functionality and
-80% of the styling was completed prior to doing the code-along exercise.
-I did review the solution for the transition animation and responsive capablities.
-All logic and workflow is orignal. Additionaly, I added the hover and unhover capablities
-of the color choices
-The infile documentation, shown in the javascript file, demostrates my style in documentation.
-It is important in code documentation to reduce trouble shooting time and make it easier to modify.
+1. This is my first javascript built from scratch. 100% of the functionality and 80% of the styling was completed prior to doing the code-along exercise. I did review the solution for the transition animation and responsive capablities.
+2. All logic and workflow is orignal. Additionaly, I added the hover and unhover capablities of the color choices
+3. The infile documentation, shown in the javascript file, demostrates my style in documentation. It is important in code documentation to reduce trouble shooting time and make it easier to modify.
