@@ -1,171 +1,194 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//  Title:  Color Guessing Game
-//
-//  Author: Tony Lanera
-//
-//  Date:   10/14/2016
-//
-//  Description:
-//  Win the game by guessing the RGB color number. A person has 3 (Easy) to 6 Hard)
-//  choices depending on skill level. The all colors and position of the correct color are random.
-//  Even I do not know the next colors and where the correct color appear.
-//
-//  Purpose:
-//  This is the first site developed utilizing HTML, CSS and Javascript.
-//  The goal of this exercise is to gain understanding and practice using the DOM and Javascript.
-//  The HTML and CSS is not complexed.
-//
-//  Highlights:
-//  This is my first javascript built from scratch. 100% of the functionality and
-//  80% of the styling was completed prior to doing the code-along exercise.
-//  I did review the solution for the transition animation and responsive capablities.
-//  All logic and workflow is orignal. Additionaly, I added the hover and unhover capablities
-//  of the color choices.
-//
-//  The infile documentation, shown in this javascript file, demostrates my style in documentation.
-//  It is important in code documentation to reduce trouble shooting time and make it easier to modify.
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+/**************************************************************************************************
+ Title:  Color Guessing Gam
+ Author: Tony Laner
+ Date:   10/14/201
+
+ Description:
+ Win the game by guessing the RGB color number. A person can choose an easy or hard level.
+ The easy level provides three colors, while hard level provides six colors to choose.
+ All colors and the position of the collors are generated randomly.
+ The location of the correct color on the grid is also randomly placed.
+
+ Purpose:
+ This is the first site developed utilizing HTML, CSS and JavaScript.
+ The goal of this exercise is to gain understanding and practice using the DOM and Javascript.
+
+ Highlights:
+ This is my first website built from scratch using HTML5 CSS3 and JavaScript.
+ 100% of the functionality and 80% of the styling was completed prior to doing the code-along exercise.
+ All logic and workflow is original. Additionally, I added the hover and unhover capabilities
+ of the color choices.
+
+ The in-file documentation, shown in the JavaScript file, demonstrates my style in documentation.
+ It is important in code documentation to reduce trouble shooting time and make it easier to modify.
+ *****************************************************************************************************/
 
 // Establish all DOM variables
-   // DOM variables for Big header
-      var bigHeader   = document.querySelector("#bigHeader"),
-          matchColor  = document.querySelector("#matchColor");
+var bigHeader    = document.querySelector("#bigHeader"),
+    matchColor   = document.querySelector("#matchColor"),
 
-   // DOM variables for menu
-      var newColors   = document.querySelector("#newColors"),
-          answer      = document.querySelector("#answer"),
-          easyMenu    = document.querySelector("#easyMenu"),
-          hardMenu    = document.querySelector("#hardMenu");
+    newColors    = document.querySelector("#newColors"),
+    answer       = document.querySelector("#answer"),
+    easyMenu     = document.querySelector("#easyMenu"),
+    hardMenu     = document.querySelector("#hardMenu"),
 
-   // DOM variable for table color palatte
-      var colorOptions = document.getElementsByClassName("colorOptions");
+    colorOptions = document.getElementsByClassName("colorOptions");
 
 // Establish all global variables
-   var gameLevel = "" // Two options for game level HARD or EASY
+var gameLevel               = "",
+    noHoverClass            = "nohover",
+    levelEasy               = "EASY",
+    levelHard               = "HARD",
+    selectedSkillLevelClass = "selectedEasyHard"
 
 // Main program to run and activate the page
-   init();
+init();
 
-   function init() {
-      // initialize the game
-         gameLevel = "HARD";
-         hardMenu.classList.toggle("selectedEasyHard");
-         startGame(gameLevel);
+/**
+ * init: This function activates the page, sets the game level to hard and sets the page event listeners
+*/
+function init() {
+   gameLevel = levelHard;
+   hardMenu.classList.toggle(selectedSkillLevelClass);
+   startGame(gameLevel);
+   setEventListener();
+}
 
-      // Capture gammer action - What are they going to do
-         newColors.addEventListener("click", function () {
-            newColors.textContent = "NEW COLORS";
-            startGame(gameLevel)}); // Overall function
-         easyMenu.addEventListener("click", function () {
-            gameLevel = easyMenu.textContent;
-            gameChoice(gameLevel)}); // Big Header function
-         hardMenu.addEventListener("click", function () {
-            gameLevel = hardMenu.textContent;
-            gameChoice(gameLevel)}); // Big Header function
-         for (var i = 0; i < colorOptions.length; i++) {
-            colorOptions[i].addEventListener("click", function () {isChoiceCorrect(this, gameLevel)});
-         };
+/**
+ * startGame: This function sets the match color, removes the game status with setGameStatus function, and
+ *            presents color options based on the skill level of the game.
+*/
+function startGame(level) {
+   setMatchColor();
+   setGameStatus(null);
+   setColorOptions(level);
+}
+
+/**
+ * setEventListener: Establish the event listeners for the page.
+ */
+function setEventListener() {
+   newColors.addEventListener("click", function () {
+      newColors.textContent = "NEW COLORS";
+      startGame(gameLevel)}); // Overall function
+   easyMenu.addEventListener("click", function () {
+      gameLevel = easyMenu.textContent;
+      gameChoice(gameLevel)}); // Big Header function
+   hardMenu.addEventListener("click", function () {
+      gameLevel = hardMenu.textContent;
+      gameChoice(gameLevel)}); // Big Header function
+   for (var i = 0; i < colorOptions.length; i++) {
+      colorOptions[i].addEventListener("click", function () {isChoiceCorrect(this, gameLevel)});
+   };
+}
+
+/**
+ * getRandomColorNmb: Generates a random rgb color
+ * @return {text} returns a rgb color in the following format "rgb(###, ###, ###)"
+ */
+function getRandomColorNmb() {
+   var colorMin = 0;
+   var colorMax = 255;
+   var vReturn = "rgb("+ getRandomIntInclusive(colorMin,colorMax) + ", "
+                       + getRandomIntInclusive(colorMin,colorMax) + ", "
+                       + getRandomIntInclusive(colorMin,colorMax) +")";
+return vReturn;}
+
+/**
+ * getRandomIntInclusive: Get a Random number between and including min and max
+ * @param  {number} min The bottom range of numbers
+ * @param  {number} max The top range of numbers
+ * @return {number} returns a random number found between the bottom and top range.
+*/
+function getRandomIntInclusive(min,max) {
+   min = Math.ceil(min);
+   max = Math.floor(max);
+return Math.floor(Math.random() * (max - min + 1)) + min;}
+
+/**
+ * setMatchColor: Determines the match color.
+ * Resets the backgroundColor of the header to the initial color.
+ */
+function setMatchColor() {
+   bigHeader.style.backgroundColor = "";
+   matchColor.textContent = getRandomColorNmb(); // Overall function
+}
+
+/**
+ * gameChoice: Set the game level which was selected by the user]
+ * @param  {text} level: The skill level of the game. Options are "HARD" with six choices or ""
+*/
+function gameChoice(level) {
+   easyMenu.classList.toggle(selectedSkillLevelClass);
+   hardMenu.classList.toggle(selectedSkillLevelClass);
+   startGame(level);
+}
+
+/**
+ * setGameStatus: Set the game status for the game.
+ * @param {bollean} options: There are three type of game status. "True": Person won the game.
+ *                           "False": Person made a wrong selection. "Null": Resets the game status
+ */
+function setGameStatus(options) {
+   if (options === true) {
+      answer.textContent = "Correct";
+      newColors.textContent = "PLAY AGAIN?"}
+   else if (options === false) {
+      answer.textContent = "Try Again";}
+   else {answer.textContent = "";};
+}
+
+/**
+ * setColorOptions: Based on the game level this function sets the color options and sets one option as the correct color.
+ * @param {text} gameLevel The game level has two options "EASY" with three color options and "HARD" with six color options
+ */
+function setColorOptions(gameLevel) {
+   // Set color options for selection
+   for (var i = 0; i < colorOptions.length; i++) {
+      colorOptions[i].style.backgroundColor = getRandomColorNmb();
+      colorOptions[i].classList.remove(noHoverClass);
+      if (gameLevel === levelEasy && i > 2) {
+         colorOptions[i].style.backgroundColor = "";
+         colorOptions[i].classList.add(noHoverClass);
+      }
    }
+   // Set correct option for selection
+   if (gameLevel === levelEasy) {
+      correctOptionIs = getRandomIntInclusive(0,2);
+   }
+   else {
+      correctOptionIs = getRandomIntInclusive(0,(colorOptions.length - 1));
+   }
+   colorOptions[correctOptionIs].style.backgroundColor = matchColor.textContent;
+};
 
-// All Functions are listed in the following section
-   // Overall Functions: Are not specific to a particular area of the page.
-   // Big Header Functions: Are functions that only effect the Big Header area
-   // Menu Functions: Are functions that only effect the Menu area
-   // Palatte Functions: Are functions that only effect the Menu area
-
-// Overall Functions: are not specific to a particular area of the page.
-   // This function will start the game
-      function startGame(level) {
-         setMatchColor(); // Header Function
-         setWinner(null); // Menu Function
-         setColorOptions(level);  // Table Function
-      return;}
-
-   // This will get a random color
-      function getRandomColorNmb() {
-         var colorMin = 0;
-         var colorMax = 255;
-         var vReturn = "rgb("+ getRandomIntInclusive(colorMin,colorMax) + ", "
-                             + getRandomIntInclusive(colorMin,colorMax) + ", "
-                             + getRandomIntInclusive(colorMin,colorMax) +")";
-      return vReturn;}
-
-   // Get a Random number between and including min and max
-      function getRandomIntInclusive(min,max) {
-         min = Math.ceil(min);
-         max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;}
-
-// Big Header Functions: Used to manipulate the big header section
-   // Set the master color for the game
-      function setMatchColor() {
-         bigHeader.style.backgroundColor = "";
-         matchColor.textContent = getRandomColorNmb(); // Overall function
-      return;}
-
-   // Set the game level selected by the gammer
-      function gameChoice(level) {
-         easyMenu.classList.toggle("selectedEasyHard");
-         hardMenu.classList.toggle("selectedEasyHard");
-         startGame(level);
-      return;}
-
-// Menu Functions
-   // Set Winner - Display
-      function setWinner(options) {
-         if (options === true) {
-            answer.textContent = "Correct";
-            newColors.textContent = "PLAY AGAIN?"}
-         else if (options === false) {
-            answer.textContent = "Try Again";}
-         else {answer.textContent = "";};
-      return;}
-
-// Palatte Functions - Color Selections
-   // Set random colors option for selections
-      function setColorOptions(gameLevel) {
-         // Set color options for selection
+/**
+* isChoiceCorrect: Determines if the user has selected the correct color. If yes, this function changes the background color of header and
+*                  all color options to the correct color and sets game status to correct.
+*                  If no, then the color option selected is removed and the game status is set to "try again".
+* @param {object} arrayElement The color selected from the grid
+* @param {text} level The two game levels. "EASY" with three color options and "HARD" with six color options.
+ */
+function isChoiceCorrect(arrayElement, level) {
+   if (arrayElement.style.backgroundColor === matchColor.textContent) {
+      if (level === levelEasy) {
+         for (var i = 0; i < 3; i++) {
+            colorOptions[i].style.backgroundColor = matchColor.textContent
+            colorOptions[i].classList.add(noHoverClass);
+         }
+      }
+      else if (level === levelHard) {
          for (var i = 0; i < colorOptions.length; i++) {
-            colorOptions[i].style.backgroundColor = getRandomColorNmb();
-            colorOptions[i].classList.remove("nohover");
-            if (gameLevel === "EASY" && i > 2) {
-               colorOptions[i].style.backgroundColor = "";
-               colorOptions[i].classList.add("nohover");
-            }
+            colorOptions[i].style.backgroundColor = matchColor.textContent
+            colorOptions[i].classList.add(noHoverClass);
          }
-         // Set correct option for selection
-         if (gameLevel === "EASY") {
-            correctOptionIs = getRandomIntInclusive(0,2);
-         }
-         else {
-            correctOptionIs = getRandomIntInclusive(0,(colorOptions.length - 1));
-         }
-         colorOptions[correctOptionIs].style.backgroundColor = matchColor.textContent;
       };
-
-   // Check if Choice is correct
-      function isChoiceCorrect(arrayElement, level) {
-         if (arrayElement.style.backgroundColor === matchColor.textContent) {
-            if (level === "EASY") {
-               for (var i = 0; i < 3; i++) {
-                  colorOptions[i].style.backgroundColor = matchColor.textContent
-                  colorOptions[i].classList.add("nohover");
-               }
-            }
-            else if (level === "HARD") {
-               for (var i = 0; i < colorOptions.length; i++) {
-                  colorOptions[i].style.backgroundColor = matchColor.textContent
-                  colorOptions[i].classList.add("nohover");
-               }
-            };
-            bigHeader.style.backgroundColor = matchColor.textContent;
-            setWinner(true);
-         }
-         else {
-            arrayElement.style.backgroundColor = "";
-            arrayElement.classList.add("nohover");
-            setWinner(false);
-         }
-      return;}
+      bigHeader.style.backgroundColor = matchColor.textContent;
+      setGameStatus(true);
+   }
+   else {
+      arrayElement.style.backgroundColor = "";
+      arrayElement.classList.add(noHoverClass);
+      setGameStatus(false);
+   }
+}

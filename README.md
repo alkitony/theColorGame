@@ -12,22 +12,26 @@ An RGB color is specified as an integer between 0 and 255 for each of the three 
 
 ## Background
 
-**Date:**   10/14/201
+**Author:** Tony Lanera
 
 **Description:**
 
-Win the game by guessing the RGB color number. A person has 3 (Easy) to 6 Hard)
-choices depending on skill level. The all colors and position of the correct color are random.
-Even I do not know the next colors and where the correct color appear
+Win the game by guessing the RGB color number. A person can choose an easy or hard level.
+The easy level provides three colors, while hard level provides six colors to choose.
+All colors and the position of the colors are generated randomly.
+The location of the correct color on the grid is also randomly placed.
 
 **Purpose:**
 
-This is the first site developed utilizing HTML, CSS and Javascript.
+This is the first site developed utilizing HTML, CSS and JavaScript.
 The goal of this exercise is to gain understanding and practice using the DOM and Javascript.
-The HTML and CSS is not complexed
 
-## Coding Highlights
+**Highlights:**
 
-1. This is my first javascript built from scratch. 100% of the functionality and 80% of the styling was completed prior to doing the code-along exercise. I did review the solution for the transition animation and responsive capablities.
-2. All logic and workflow is orignal. Additionaly, I added the hover and unhover capablities of the color choices
-3. The infile documentation, shown in the javascript file, demostrates my style in documentation. It is important in code documentation to reduce trouble shooting time and make it easier to modify.
+This is my first website built from scratch using HTML5 CSS3 and JavaScript.
+100% of the functionality and 80% of the styling was completed prior to doing the code-along exercise.
+All logic and workflow is original. Additionally, I added the hover and unhover capabilities
+of the color choices.
+
+The in-file documentation, shown in the JavaScript file, demonstrates my style in documentation.
+It is important in code documentation to reduce trouble shooting time and make it easier to modify.
