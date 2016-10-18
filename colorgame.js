@@ -7,19 +7,20 @@
  Win the game by guessing the RGB color number. A person can choose an easy or hard level.
  The easy level provides three colors, while hard level provides six colors to choose.
  All colors and the position of the collors are generated randomly.
- The location of the correct color on the grid is also randomly placed.
+ The location of the correct color on the grid is also randomly placed
 
  Purpose:
- This is the first site developed utilizing HTML, CSS and JavaScript.
+ This is the first site developed utilizing HTML, CSS and Javascript.
  The goal of this exercise is to gain understanding and practice using the DOM and Javascript.
+ The HTML and CSS is not complexed
 
  Highlights:
- This is my first website built from scratch using HTML5 CSS3 and JavaScript.
+ This is my first website built from scratch using HTML5, CSS3 and Javascript.
  100% of the functionality and 80% of the styling was completed prior to doing the code-along exercise.
- All logic and workflow is original. Additionally, I added the hover and unhover capabilities
+ All logic and workflow is orignal. Additionaly, I added the hover and unhover capablities
  of the color choices.
 
- The in-file documentation, shown in the JavaScript file, demonstrates my style in documentation.
+ The infile documentation, shown in this javascript file, demostrates my style in documentation.
  It is important in code documentation to reduce trouble shooting time and make it easier to modify.
  *****************************************************************************************************/
 
