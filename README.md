@@ -11,6 +11,9 @@ A person must select the right color that matches the RGB number shown in the ti
 An RGB color is specified as an integer between 0 and 255 for each of the three primary colors: red, green, and blue. The higher the  number the more intense is the color. RGB Color is shown as follows: rgb(red, green, blue). For example, rgb(0, 0, 255) is rendered as blue, because the blue parameter is set to its highest value (255) and the others are set to 0.
 
 ## Background
+
+This site and code were developed as part of the [Udemy: The Web Developer Bootcamp](https://www.udemy.com/the-web-developer-bootcamp/) course.
+
 **Author:** Tony Lanera
 
 **Description:**
